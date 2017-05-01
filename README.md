@@ -9,3 +9,7 @@ A Calculator web application with responsive design.
 `node index.js`
 * Go to any browser and use the following link to view the app :
 `localhost:3000`
+
+# LINK
+* Use the below link to use the app.
+* `https://calculator-ragar005.herokuapp.com/#!/`
