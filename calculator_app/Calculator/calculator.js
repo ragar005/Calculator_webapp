@@ -18,7 +18,7 @@ $scope.input = function(input) {
 if(input === 'clear'){
 if($scope.output.length == 0)
 return;
-else {$scope.output = ''; $scope.validate=0; $scope.resultprinted=0;}
+else {$scope.output = ''; $scope.validate=0; $scope.resultprinted=0;$scope.opt_exec="";}
 }
 
 else if(input == 'save'){
@@ -34,6 +34,7 @@ localStorage.setItem('list_of_10_calculations',  JSON.stringify($scope.list_of_1
 $scope.output = '';
 $scope.validate=0;
 $scope.resultprinted=0;
+$scope.opt_exec="";
 }
 
 
@@ -46,10 +47,12 @@ else if(input == 'sqrt'){
   else if($scope.output == ''){
   $scope.output = "square root of 0" + $scope.output + " = " +Math.sqrt($scope.output);
   $scope.validate = 1;
+  $scope.opt_exec = "false";
   }
   else{
   $scope.output = "square root of " + $scope.output + " = " +Math.sqrt($scope.output);
   $scope.validate = 1;
+  $scope.opt_exec = "false";
   }
 }
   
@@ -61,8 +64,11 @@ else if (input === 'eval'){
   if($scope.output.indexOf("square root") != -1)
   return;
   var value =  Math.round(evil($scope.output)*10000)/10000;
+  if(isNaN(value))
+    return;
   $scope.output = $scope.operation.concat(value);
   $scope.resultprinted = 1;
+  $scope.opt_exec ="false";
   }
 }
   
@@ -77,6 +83,8 @@ else if (input === 'eval'){
 }
 
 function evil(fn) {
+  if($scope.output.indexOf("=") != -1)
+  return;
 	$scope.operation = fn+" = ";
   return new Function('return ' + fn)();
 }
