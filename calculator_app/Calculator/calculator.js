@@ -86,7 +86,14 @@ function evil(fn) {
   if($scope.output.indexOf("=") != -1)
   return;
 	$scope.operation = fn+" = ";
-  return new Function('return ' + fn)();
+
+    try {
+      return new Function('return ' + fn)();
+    }
+    catch(err) {
+      alertopen();
+    }
+  
 }
 
 function alertopen(){
